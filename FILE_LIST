@@ -43,6 +43,9 @@ card/card2.html: just used for testing html/css/javascript stuff
 
 Data storage scheme:
 All data is stored in csv files in "data/"
+Permission note: data's group needs to be "www-data" or it's equvalent
+	         all files/folders in data need to be owned by www-data
+
 data/classlist: each line is a different class, has the following information
 		<classname>,<roster size>,<seating chart rows>,<seating chart cols>
 

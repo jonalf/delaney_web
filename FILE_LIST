@@ -1,0 +1,65 @@
+makeclass.html: start here, asks for class name/seat layout (rows x cols)
+		also start date, though that is not used now
+		Form data is sent to makeclass.py
+
+makeclass.py: sets up blank seating chart with rows x cols entries
+	      each seat has three spots, 
+	      	   top is for nickname (not needed for every entry)
+		   middle for first name
+		   bottom for last name
+	      submit will call savenewclass.py
+
+savenewclass.py: creates the necessary files for a new class
+		 Any entry without both a first and last name will not be included
+		 You can leave the default numbers in these spaces
+		 Will show a message that the files were created and an option to 
+		 continue, which will call showclass.py
+
+showclass.py: displays a class seating chart	      
+	      Any seat without an entry is left blank
+	      Clicking on a student name will bring up student-specific information via
+	      show_student.py
+
+show_student.py: Displays student specific information
+		 Provides options to mark absent, late or excused
+		 Excused gives you the option to mark today or another date
+		 Those thre buttons call update_record.py
+		 
+update_record.py: modify the save data for a student.
+		  Will modify the Absence, Lateness and Excused lists accordingly
+		  Only one of the three options is allowed for any day
+		       i.e. marking a student late after already marking them
+		       absent will remove the absent mark and add a late mark
+
+viewclass.html: if a class is already created, enter the name here to load it
+		class showclass.py
+		start date field is no longer used
+
+style.css: css file
+
+scrupts.js: javascript file
+
+card/card2.html: just used for testing html/css/javascript stuff
+
+Data storage scheme:
+All data is stored in csv files in "data/"
+data/classlist: each line is a different class, has the following information
+		<classname>,<roster size>,<seating chart rows>,<seating chart cols>
+
+data/classlist/<class name>/: directory for each class (new is already created)
+
+data/classlist/<class name>/roster: Master roster file for a class
+		      <student id>,<first name>,<last name>,<nickname>
+		      student id corresponds to the seat #, used in most internal scripts.
+		      nickname not necessary, will be ignored if nothing after the ","
+
+data/classlist/<class name>/<students>/: Directory for each student
+
+data/classlist/<class name>/<students>/<student id>: Student record file
+		      Each file has three lines, each containing csv separated
+		      dates for absences, latenesses and excused marks in the format
+		      month/day
+		      	   line 0: A<csv dates> 
+		      	   line 1: L<csv dates> 
+		      	   line 2: E<csv dates>
+		      Grade information may be stored here in the future.

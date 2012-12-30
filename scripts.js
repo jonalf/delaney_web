@@ -69,7 +69,7 @@ function mark_absent( s, c, m, name) {
     
     else {
 	var d = new Date();
-	today = (d.getMonth() + 1) + "/" + d.getDay();
+	today = (d.getMonth() + 1) + "/" + d.getDate();
     }
     
     console.log( today );
